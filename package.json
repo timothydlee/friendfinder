@@ -1,0 +1,13 @@
+{
+  "name": "friendfinder",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": "git@github.com:timothydlee/friendfinder.git",
+  "author": "Tim Lee",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "express": "^4.14.1",
+    "path": "^0.12.7"
+  }
+}
