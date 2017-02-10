@@ -1,23 +1,62 @@
-//Requiring dependencies for express server
-const express 		= require ('express');
-const bodyParser 	= require ('body-parser');
-const path 				= require ('path');
+// ==============================================================================
+// DEPENDENCIES
+// Series of npm packages that we will use to give our server useful functionality
+// ==============================================================================
 
-//Alerts node that we are creating express server
-const app = express();
+var express = require("express");
+var bodyParser = require("body-parser");
+var path = require("path");
 
-//Sets a port as process.env or our default 4000;
-const PORT = process.env.PORT || 4000;
 
-//Instantiating body parser
+
+
+
+
+// ==============================================================================
+// EXPRESS CONFIGURATION
+// This sets up the basic properties for our express server
+// ==============================================================================
+
+// Tells node that we are creating an "express" server
+var app = express();
+
+// Sets an initial port. We"ll use this later in our listener
+var PORT = process.env.PORT || 4000;
+
+// BodyParser makes it easy for our server to interpret data sent to it.
+// The code below is pretty standard.
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
-app.use(bodyParser.json({ type: 'application/vnd.api+json '}));
+app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
-//Requiring routes:
-require('./app/routing/api-routes.js');
-require('./app/routing/html-routes.js');
 
-//Listening to port
-app.listen(PORT, () => console.log(`App listening on PORT: ${PORT}`));
+
+
+
+
+
+// ================================================================================
+// ROUTER
+// The below points our server to a series of "route" files.
+// These routes give our server a "map" of how to respond when users visit or request data from various URLs.
+// ================================================================================
+
+require("./app/routing/api-routes.js")(app);
+require("./app/routing/html-routes.js")(app);
+
+
+
+
+
+
+
+
+// ==============================================================================
+// LISTENER
+// The below code effectively "starts" our server
+// ==============================================================================
+
+app.listen(PORT, function() {
+  console.log("App listening on PORT: " + PORT);
+});
